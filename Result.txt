@@ -5,6 +5,10 @@
 課題２
 
 一つ目の結果
-[{"id":1,"name":"Alice"},{"id":2,"name":"Bella"},{"id":3,"name":"Chris"},{"id":4,"name":"Daisy"},{"id":5,"name":"Ellen"}]{"id":1,"name":"Alice"}
+[{"id":1,"name":"Alice"},{"id":2,"name":"Bella"},{"id":3,"name":"Chris"},{"id":4,"name":"Daisy"},{"id":5,"name":"Ellen"},{"id":10,"name":"John"}]
 二つ目の結果
 {"id":1,"name":"Alice"}
+三つ目の結果
+{"id":10,"name":"John"}
+四つ目の結果
+特に応答は無し(status code 204)
