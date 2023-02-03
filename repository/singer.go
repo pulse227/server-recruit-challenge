@@ -3,7 +3,7 @@ package repository
 import (
 	"context"
 
-	"github.com/pulse227/server-recruit-challenge-sample/model"
+	"github.com/Lupusdog/server-recruit-challenge-sample/model"
 )
 
 type SingerRepository interface {

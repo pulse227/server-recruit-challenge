@@ -3,11 +3,11 @@ package api
 import (
 	"net/http"
 
+	"github.com/Lupusdog/server-recruit-challenge-sample/api/middleware"
+	"github.com/Lupusdog/server-recruit-challenge-sample/controller"
+	"github.com/Lupusdog/server-recruit-challenge-sample/infra/memorydb"
+	"github.com/Lupusdog/server-recruit-challenge-sample/service"
 	"github.com/gorilla/mux"
-	"github.com/pulse227/server-recruit-challenge-sample/api/middleware"
-	"github.com/pulse227/server-recruit-challenge-sample/controller"
-	"github.com/pulse227/server-recruit-challenge-sample/infra/memorydb"
-	"github.com/pulse227/server-recruit-challenge-sample/service"
 )
 
 func NewRouter() *mux.Router {

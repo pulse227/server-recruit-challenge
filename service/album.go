@@ -3,13 +3,13 @@ package service
 import (
 	"context"
 
-	"github.com/pulse227/server-recruit-challenge-sample/model"
-	"github.com/pulse227/server-recruit-challenge-sample/repository"
+	"github.com/Lupusdog/server-recruit-challenge-sample/model"
+	"github.com/Lupusdog/server-recruit-challenge-sample/repository"
 )
 
 type AlbumService interface {
-	GetAlbumListService(ctx context.Context) ([]*model.Album, error)
-	GetAlbumService(ctx context.Context, albumID model.AlbumID) (*model.Album, error)
+	GetAlbumListService(ctx context.Context) ([]*model.AlbumWithSinger, error)
+	GetAlbumService(ctx context.Context, albumID model.AlbumID) (*model.AlbumWithSinger, error)
 	PostAlbumService(ctx context.Context, album *model.Album) error
 	DeleteAlbumService(ctx context.Context, albumID model.AlbumID) error 
 }
@@ -24,7 +24,7 @@ func NewAlbumService(albumRepository repository.AlbumRepository) *albumService {
 	return &albumService{albumRepository: albumRepository}
 }
 
-func (s *albumService) GetAlbumListService(ctx context.Context) ([]*model.Album, error) {
+func (s *albumService) GetAlbumListService(ctx context.Context) ([]*model.AlbumWithSinger, error) {
 	albums, err := s.albumRepository.GetAll(ctx)
 	if err != nil {
 		return nil, err
@@ -32,7 +32,7 @@ func (s *albumService) GetAlbumListService(ctx context.Context) ([]*model.Album,
 	return albums, nil
 }
 
-func (s *albumService) GetAlbumService(ctx context.Context, albumID model.AlbumID) (*model.Album, error) {
+func (s *albumService) GetAlbumService(ctx context.Context, albumID model.AlbumID) (*model.AlbumWithSinger, error) {
 	album, err := s.albumRepository.Get(ctx, albumID)
 	if err != nil {
 		return nil, err
