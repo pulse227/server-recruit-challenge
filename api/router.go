@@ -15,7 +15,7 @@ func NewRouter() *mux.Router {
 	singerService := service.NewSingerService(singerRepo)
 	singerController := controller.NewSingerController(singerService)
 
-	albumRepo := memorydb.NewAlbumRepository()
+	albumRepo := memorydb.NewAlbumRepository(singerRepo)
 	albumService := service.NewAlbumService(albumRepo)
 	albumController := controller.NewAlbumController(albumService)
 
