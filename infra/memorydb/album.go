@@ -15,6 +15,7 @@ type albumRepository struct {
 	singerRepo repository.SingerRepository
 }
 
+var _ repository.SingerRepository = (*singerRepository)(nil) 
 var _ repository.AlbumRepository = (*albumRepository)(nil)
 
 func NewAlbumRepository(singerRepo *singerRepository) *albumRepository {
@@ -23,8 +24,6 @@ func NewAlbumRepository(singerRepo *singerRepository) *albumRepository {
 		2: {ID: 2, Title: "Alice's 2nd Album", SingerID: 1},
 		3: {ID: 3, Title: "Bella's 1st Album", SingerID: 2},
 	}
-
-	var _ repository.SingerRepository = (*singerRepository)(nil) 
 
 	return &albumRepository{
 		albumMap: initMap,
