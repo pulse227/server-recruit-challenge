@@ -3,7 +3,6 @@
 
 
 課題２
-
 一つ目の結果
 [{"id":1,"name":"Alice"},{"id":2,"name":"Bella"},{"id":3,"name":"Chris"},{"id":4,"name":"Daisy"},{"id":5,"name":"Ellen"}]
 二つ目の結果
@@ -11,4 +10,15 @@
 三つ目の結果
 {"id":10,"name":"John"}
 四つ目の結果
-特に応答は無し(status code 204)
+特に応答は無し(status code: 204)
+
+課題３
+一つ目の結果
+[{"id":1,"title":"Alice's 1st Album","singer_id":1},{"id":2,"title":"Alice's 2nd Album","singer_id":1},{"id":3,"title":"Bella's 1st Album","singer_id":2}]
+二つ目の結果
+{"id":1,"title":"Alice's 1st Album","singer_id":1}
+三つ目の結果
+{"id":10,"title":"Chris 1st","singer_id":3}
+{"id":10,"title":"Chris 1st","singer_id":3}
+四つ目の結果
+特に応答は無し(status code: 204)
