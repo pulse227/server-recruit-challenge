@@ -6,8 +6,8 @@ import (
 	"net/http"
 	"strconv"
 
-	"github.com/Lupusdog/server-recruit-challenge-sample/model"
-	"github.com/Lupusdog/server-recruit-challenge-sample/service"
+	"github.com/Lupusdog/server-recruit-challenge-2024/model"
+	"github.com/Lupusdog/server-recruit-challenge-2024/service"
 	"github.com/gorilla/mux"
 )
 

@@ -22,3 +22,9 @@
 {"id":10,"title":"Chris 1st","singer_id":3}
 四つ目の結果
 特に応答は無し(status code: 204)
+
+課題４
+一つ目の結果
+{"id":1,"title":"Alice's 1st Album","singer":{"id":1,"name":"Alice"}}
+二つ目の結果
+[{"id":1,"title":"Alice's 1st Album","singer":{"id":1,"name":"Alice"}},{"id":2,"title":"Alice's 2nd Album","singer":{"id":1,"name":"Alice"}},{"id":3,"title":"Bella's 1st Album","singer":{"id":2,"name":"Bella"}}]

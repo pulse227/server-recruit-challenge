@@ -5,9 +5,8 @@ import (
 	"errors"
 	"sync"
 
-	"github.com/Lupusdog/server-recruit-challenge-sample/memorydb"
-	"github.com/Lupusdog/server-recruit-challenge-sample/model"
-	"github.com/Lupusdog/server-recruit-challenge-sample/repository"
+	"github.com/Lupusdog/server-recruit-challenge-2024/model"
+	"github.com/Lupusdog/server-recruit-challenge-2024/repository"
 )
 
 type albumRepository struct {
@@ -88,7 +87,7 @@ func (r *albumRepository) Delete(ctx context.Context, id model.AlbumID) error {
 func (r *albumRepository) GetSingerInfo(ctx context.Context, singerID model.SingerID) (*model.Singer, error) {
 	r.RLock()
 	defer r.RUnlock()
-	singerRepo := memorydb.NewSingerRepository()
+	singerRepo := NewSingerRepository()
 	singer, err := singerRepo.Get(ctx, singerID)
 	if err != nil {
 		return nil, errors.New("cannnot get singer information")

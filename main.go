@@ -8,7 +8,7 @@ import (
 	"os/signal"
 	"time"
 
-	"github.com/Lupusdog/server-recruit-challenge-sample/api"
+	"github.com/Lupusdog/server-recruit-challenge-2024/api"
 )
 
 func main() {
