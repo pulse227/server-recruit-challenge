@@ -2,13 +2,13 @@ package controller
 
 import (
 	"encoding/json"
-	"log"
+	"log/slog"
 	"net/http"
 )
 
 // エラーが発生したときのレスポンス処理をここで行う
 func errorHandler(w http.ResponseWriter, r *http.Request, statusCode int, message string) {
-	log.Printf("error: %s\n", message)
+	slog.ErrorContext(r.Context(), "error occurred", "message", message)
 
 	type ErrorMessage struct {
 		Message string `json:"message"`

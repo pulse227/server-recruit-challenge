@@ -3,6 +3,7 @@ package main
 import (
 	"context"
 	"log"
+	"log/slog"
 	"net/http"
 	"os"
 	"os/signal"
@@ -12,10 +13,21 @@ import (
 )
 
 func main() {
+	logger := slog.New(slog.NewJSONHandler(
+		os.Stdout,
+		&slog.HandlerOptions{
+			Level: slog.LevelDebug,
+		},
+	))
+	slog.SetDefault(logger)
+
 	ctx, stop := signal.NotifyContext(context.Background(), os.Interrupt)
 	defer stop()
 
-	r := api.NewRouter()
+	r, err := api.NewRouter("root", "root", "localhost:13306", "myapp")
+	if err != nil {
+		log.Fatalf("new app error: %v", err)
+	}
 
 	server := &http.Server{
 		Addr:    ":8888",
@@ -27,6 +39,6 @@ func main() {
 		defer cancel()
 		server.Shutdown(ctx)
 	}()
-	log.Println("server start running at :8888")
+	slog.Info("server start running at :8888")
 	log.Fatal(server.ListenAndServe())
 }

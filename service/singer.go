@@ -41,6 +41,10 @@ func (s *singerService) GetSingerService(ctx context.Context, singerID model.Sin
 }
 
 func (s *singerService) PostSingerService(ctx context.Context, singer *model.Singer) error {
+	if err := singer.Validate(); err != nil {
+		return err
+	}
+
 	if err := s.singerRepository.Add(ctx, singer); err != nil {
 		return err
 	}

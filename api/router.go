@@ -3,26 +3,35 @@ package api
 import (
 	"net/http"
 
-	"github.com/gorilla/mux"
 	"github.com/pulse227/server-recruit-challenge-sample/api/middleware"
 	"github.com/pulse227/server-recruit-challenge-sample/controller"
-	"github.com/pulse227/server-recruit-challenge-sample/infra/memorydb"
+	"github.com/pulse227/server-recruit-challenge-sample/infra/mysqldb"
 	"github.com/pulse227/server-recruit-challenge-sample/service"
 )
 
-func NewRouter() *mux.Router {
-	singerRepo := memorydb.NewSingerRepository()
+func NewRouter(
+	dbUser, dbPass, dbHost, dbName string,
+) (http.Handler, error) {
+	dbClient, err := mysqldb.Initialize(dbUser, dbPass, dbHost, dbName)
+	if err != nil {
+		return nil, err
+	}
+	// 接続確認
+	if err := dbClient.Ping(); err != nil {
+		return nil, err
+	}
+
+	singerRepo := mysqldb.NewSingerRepository(dbClient)
 	singerService := service.NewSingerService(singerRepo)
 	singerController := controller.NewSingerController(singerService)
 
-	r := mux.NewRouter()
+	mux := http.NewServeMux()
+	mux.HandleFunc("GET /singers", singerController.GetSingerListHandler)
+	mux.HandleFunc("GET /singers/{id}", singerController.GetSingerDetailHandler)
+	mux.HandleFunc("POST /singers", singerController.PostSingerHandler)
+	mux.HandleFunc("DELETE /singers/{id}", singerController.DeleteSingerHandler)
 
-	r.HandleFunc("/singers", singerController.GetSingerListHandler).Methods(http.MethodGet)
-	r.HandleFunc("/singers/{id:[0-9]+}", singerController.GetSingerDetailHandler).Methods(http.MethodGet)
-	r.HandleFunc("/singers", singerController.PostSingerHandler).Methods(http.MethodPost)
-	r.HandleFunc("/singers/{id:[0-9]+}", singerController.DeleteSingerHandler).Methods(http.MethodDelete)
+	wrappedMux := middleware.LoggingMiddleware(mux)
 
-	r.Use(middleware.LoggingMiddleware)
-
-	return r
+	return wrappedMux, nil
 }

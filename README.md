@@ -1,4 +1,4 @@
-# サーバーエンジニア向け 2025新卒採用事前課題
+# サーバーエンジニア向け 2026新卒採用事前課題
 
 あなたは歌手とアルバムを管理するAPIの機能開発にたずさわることになりました。
 
@@ -12,11 +12,13 @@
 プログラムのコードを読み、中身を把握しましょう。
 
 ## 課題2
-go をインストールし(各自で調べてください)、歌手を管理するAPIの動作を確認しましょう。
+Docker と Go をインストールし(各自で調べてください)、歌手を管理するAPIの動作を確認しましょう。
 
 ```
 # (ターミナルを開いて)
-# サーバーを起動する
+# Docker コンテナを起動する
+docker compose up -d
+# HTTP サーバーを起動する
 go run main.go
 ```
 
@@ -32,7 +34,7 @@ curl http://localhost:8888/singers/1
 curl -X POST -d '{"id":10,"name":"John"}' http://localhost:8888/singers
 
 # 歌手を削除する
-curl -X DELETE http://localhost:8888/singers/1
+curl -X DELETE http://localhost:8888/singers/10
 ```
 
 ## 課題3
@@ -71,7 +73,7 @@ curl http://localhost:8888/albums/10
 ### 3-4
 アルバムを削除するAPI
 ```
-curl -X DELETE http://localhost:8888/albums/1
+curl -X DELETE http://localhost:8888/albums/10
 ```
 
 ## 課題4
@@ -96,6 +98,6 @@ curl http://localhost:8888/albums
 ```
 
 ## 課題5
-歌手とそのアルバムを管理するという点で、現状のAPIの改善点を検討し思いつく限り書き出してください。
+歌手とそのアルバムを管理するという点で、現状の実装の改善点を検討し思いつく限り書き出してください。
 
 実装をする必要はありません。

@@ -6,7 +6,6 @@ import (
 	"net/http"
 	"strconv"
 
-	"github.com/gorilla/mux"
 	"github.com/pulse227/server-recruit-challenge-sample/model"
 	"github.com/pulse227/server-recruit-challenge-sample/service"
 )
@@ -33,7 +32,8 @@ func (c *singerController) GetSingerListHandler(w http.ResponseWriter, r *http.R
 
 // GET /singers/{id} のハンドラー
 func (c *singerController) GetSingerDetailHandler(w http.ResponseWriter, r *http.Request) {
-	singerID, err := strconv.Atoi(mux.Vars(r)["id"])
+	idString := r.PathValue("id")
+	singerID, err := strconv.Atoi(idString)
 	if err != nil {
 		err = fmt.Errorf("invalid path param: %w", err)
 		errorHandler(w, r, 400, err.Error())
@@ -71,7 +71,8 @@ func (c *singerController) PostSingerHandler(w http.ResponseWriter, r *http.Requ
 
 // DELETE /singers/{id} のハンドラー
 func (c *singerController) DeleteSingerHandler(w http.ResponseWriter, r *http.Request) {
-	singerID, err := strconv.Atoi(mux.Vars(r)["id"])
+	idString := r.PathValue("id")
+	singerID, err := strconv.Atoi(idString)
 	if err != nil {
 		err = fmt.Errorf("invalid path param: %w", err)
 		errorHandler(w, r, 400, err.Error())

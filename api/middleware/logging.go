@@ -1,7 +1,7 @@
 package middleware
 
 import (
-	"log"
+	"log/slog"
 	"net/http"
 )
 
@@ -21,12 +21,12 @@ func (lw *loggingWriter) WriteHeader(code int) {
 
 func LoggingMiddleware(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, req *http.Request) {
-		log.Printf("uri: %s, method: %s\n", req.RequestURI, req.Method)
+		slog.InfoContext(req.Context(), "access", "uri", req.RequestURI, "method", req.Method)
 
 		rlw := newLoggingWriter(w)
 
 		next.ServeHTTP(rlw, req)
 
-		log.Printf("response code: %d", rlw.code)
+		slog.InfoContext(req.Context(), "response", "code", rlw.code)
 	})
 }
